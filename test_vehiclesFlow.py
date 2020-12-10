@@ -68,7 +68,7 @@ class VehiclesFlow(unittest.TestCase):
         self.assertEqual(name, 'TestVehicleName')
 
     def test_edit_vehicle_with_correct_values(self):
-        with open('Mileage.json.json', 'r') as myfile:
+        with open('Mileage.json', 'r') as myfile:
             data = myfile.read()
         # parse file
         test_values = json.loads(data)
@@ -76,7 +76,7 @@ class VehiclesFlow(unittest.TestCase):
             title = test_value["title"]
             make = test_value["make"]
             model = test_value["model"]
-            description = "car of year "+test_value[""]
+            description = test_value["year"]
             time.sleep(1)
             self.driver.find_element_by_id("android:id/text1").click()
             time.sleep(1)
