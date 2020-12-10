@@ -76,7 +76,8 @@ class VehiclesFlow(unittest.TestCase):
             title = test_value["title"]
             make = test_value["make"]
             model = test_value["model"]
-            description = test_value["year"]
+            year = test_value["year"]
+            description = "Car: " + title + make
             time.sleep(1)
             self.driver.find_element_by_id("android:id/text1").click()
             time.sleep(1)
@@ -84,6 +85,7 @@ class VehiclesFlow(unittest.TestCase):
             self.driver.find_element_by_id('com.evancharlton.mileage:id/make').send_keys(make)
             self.driver.find_element_by_id('com.evancharlton.mileage:id/model').send_keys(model)
             self.driver.find_element_by_id('com.evancharlton.mileage:id/description').send_keys(description)
+            self.driver.find_element_by_id('com.evancharlton.mileage:id/year').send_keys(year)
             time.sleep(1)
             self.driver.find_element_by_id('com.evancharlton.mileage:id/save_btn').click()
             time.sleep(1)
@@ -97,7 +99,7 @@ class VehiclesFlow(unittest.TestCase):
             self.assertEqual(expected_title, title)
             expected_year = self.driver.find_element_by_id('com.evancharlton.mileage:id/year').get_attribute(
                 "text")
-            self.assertEqual(expected_year, '2020')
+            self.assertEqual(expected_year, str(year))
             expected_make = self.driver.find_element_by_id('com.evancharlton.mileage:id/make').get_attribute(
                 "text")
             self.assertEqual(expected_make, make)
