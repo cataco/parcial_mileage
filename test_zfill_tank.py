@@ -5,6 +5,7 @@ import time
 
 import pytest
 from appium import webdriver
+from appium.webdriver.common.touch_action import TouchAction
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -16,7 +17,7 @@ class Untitled(unittest.TestCase):
         "platformName": "Android",
         "automationName": "UiAutomator2",
         "deviceName": "emulator-5556",
-        "app": "/Users/ccordob/Downloads/com.evancharlton.mileage.apk"
+        "app": "/Users/ccordob/Downloads/mutantest_mileage/com.evancharlton.mileage-mutant2/com.evancharlton.mileage_3110-aligned-debugSigned.apk"
     }
     testName = 'Untitled'
     driver = None
@@ -71,48 +72,49 @@ class Untitled(unittest.TestCase):
                                                             "android.widget.LinearLayout[1]").__len__()
         self.assertEquals(new_fill_count - fill_count, 1)
 
+    def test_edit_fill(self):
+        #try:
+            #self.driver.find_element_by_id('android:id/button1').click()
+        #except:
+            #pass
+            time.sleep(1)
+            self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/"
+                                              "android.widget.FrameLayout/android.widget.TabHost/"
+                                              "android.widget.LinearLayout/android.widget.TabWidget/"
+                                              "android.widget.RelativeLayout[2]/android.widget.TextView").click()
+            time.sleep(1)
+            self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout"
+                                              "/android.widget.LinearLayout/android.widget.FrameLayout/"
+                                              "android.widget.TabHost/android.widget.LinearLayout/"
+                                              "android.widget.FrameLayout/android.widget.FrameLayout/"
+                                              "android.widget.LinearLayout/android.widget.FrameLayout/"
+                                              "android.widget.LinearLayout/android.widget.ListView/"
+                                              "android.widget.LinearLayout/"
+                                              "android.widget.LinearLayout[1]").click()
+            self.driver.find_element_by_id("com.evancharlton.mileage:id/edit").click()
+            time.sleep(1)
+            price = '2'
+            volume = '2'
+            odometer = '2'
+            self.driver.find_element_by_id("com.evancharlton.mileage:id/price").send_keys(price)
+            self.driver.find_element_by_id("com.evancharlton.mileage:id/volume").send_keys(volume)
+            self.driver.find_element_by_id("com.evancharlton.mileage:id/odometer").send_keys(odometer)
+            self.driver.find_element_by_id("com.evancharlton.mileage:id/save_btn").click()
+            time.sleep(1)
+            for i in range(2, 5):
+                fill_data = self.driver.find_element_by_xpath("/hierarchy/"
+                                                              "android.widget.FrameLayout/"
+                                                              "android.widget.LinearLayout/"
+                                                              "android.widget.FrameLayout[2]/"
+                                                              "android.widget.LinearLayout/"
+                                                              "android.widget.ScrollView/"
+                                                              "android.widget.LinearLayout/"
+                                                              "android.widget.LinearLayout[{}]/"
+                                                              "android.widget.TextView[2]".format(i)).text
+                self.assertTrue('2' in fill_data)
 
-def test_edit_fill(self):
-    try:
-        self.driver.find_element_by_id('android:id/button1').click()
-    except:
-        pass
-    time.sleep(1)
-    self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/"
-                                      "android.widget.FrameLayout/android.widget.TabHost/"
-                                      "android.widget.LinearLayout/android.widget.TabWidget/"
-                                      "android.widget.RelativeLayout[2]/android.widget.TextView").click()
-    time.sleep(1)
-    self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout"
-                                      "/android.widget.LinearLayout/android.widget.FrameLayout/"
-                                      "android.widget.TabHost/android.widget.LinearLayout/"
-                                      "android.widget.FrameLayout/android.widget.FrameLayout/"
-                                      "android.widget.LinearLayout/android.widget.FrameLayout/"
-                                      "android.widget.LinearLayout/android.widget.ListView/"
-                                      "android.widget.LinearLayout/"
-                                      "android.widget.LinearLayout[1]").click()
-    self.driver.find_element_by_id("com.evancharlton.mileage:id/edit").click()
-    time.sleep(1)
-    price = '2'
-    volume = '2'
-    odometer = '2'
-    self.driver.find_element_by_id("com.evancharlton.mileage:id/price").send_keys(price)
-    self.driver.find_element_by_id("com.evancharlton.mileage:id/volume").send_keys(volume)
-    self.driver.find_element_by_id("com.evancharlton.mileage:id/odometer").send_keys(odometer)
-    self.driver.find_element_by_id("com.evancharlton.mileage:id/save_btn").click()
-    for i in range(2, 5):
-        fill_data = self.driver.find_element_by_xpath("/hierarchy/"
-                                                      "android.widget.FrameLayout/"
-                                                      "android.widget.LinearLayout/"
-                                                      "android.widget.FrameLayout[2]/"
-                                                      "android.widget.LinearLayout/"
-                                                      "android.widget.ScrollView/"
-                                                      "android.widget.LinearLayout/"
-                                                      "android.widget.LinearLayout[{}]/"
-                                                      "android.widget.TextView[2]".format(i)).text
-        self.assertTrue(fill_data.contains('2'))
 
-    def test_delete_fill(self):
+    def test_remove_fill(self):
         try:
             self.driver.find_element_by_id('android:id/button1').click()
         except:
@@ -156,6 +158,6 @@ def test_edit_fill(self):
         self.assertEquals(fill_count - new_fill_count, 1)
 
 
-@classmethod
-def tearDownClass(cls):
-    cls.driver.quit()
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
