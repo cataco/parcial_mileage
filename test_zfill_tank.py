@@ -112,6 +112,49 @@ def test_edit_fill(self):
                                                       "android.widget.TextView[2]".format(i)).text
         self.assertTrue(fill_data.contains('2'))
 
+    def test_delete_fill(self):
+        try:
+            self.driver.find_element_by_id('android:id/button1').click()
+        except:
+            pass
+        time.sleep(1)
+        actions = TouchAction(self.driver)
+        self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/"
+                                          "android.widget.FrameLayout/android.widget.TabHost/"
+                                          "android.widget.LinearLayout/android.widget.TabWidget/"
+                                          "android.widget.RelativeLayout[2]/android.widget.TextView").click()
+        time.sleep(1)
+        fill_count = self.driver.find_elements_by_xpath("/hierarchy/android.widget.FrameLayout"
+                                                        "/android.widget.LinearLayout/android.widget.FrameLayout/"
+                                                        "android.widget.TabHost/android.widget.LinearLayout/"
+                                                        "android.widget.FrameLayout/android.widget.FrameLayout/"
+                                                        "android.widget.LinearLayout/android.widget.FrameLayout/"
+                                                        "android.widget.LinearLayout/android.widget.ListView/"
+                                                        "android.widget.LinearLayout/"
+                                                        "android.widget.LinearLayout").__len__()
+        element = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout"
+                                                    "/android.widget.LinearLayout/android.widget.FrameLayout/"
+                                                    "android.widget.TabHost/android.widget.LinearLayout/"
+                                                    "android.widget.FrameLayout/android.widget.FrameLayout/"
+                                                    "android.widget.LinearLayout/android.widget.FrameLayout/"
+                                                    "android.widget.LinearLayout/android.widget.ListView/"
+                                                    "android.widget.LinearLayout/"
+                                                    "android.widget.LinearLayout[1]")
+        actions.long_press(element)
+        self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/"
+                                          "android.widget.ListView/android.widget.LinearLayout[2]/"
+                                          "android.widget.LinearLayout").click()
+        new_fill_count = self.driver.find_elements_by_xpath("/hierarchy/android.widget.FrameLayout"
+                                                            "/android.widget.LinearLayout/android.widget.FrameLayout/"
+                                                            "android.widget.TabHost/android.widget.LinearLayout/"
+                                                            "android.widget.FrameLayout/android.widget.FrameLayout/"
+                                                            "android.widget.LinearLayout/android.widget.FrameLayout/"
+                                                            "android.widget.LinearLayout/android.widget.ListView/"
+                                                            "android.widget.LinearLayout/"
+                                                            "android.widget.LinearLayout").__len__()
+
+        self.assertEquals(fill_count - new_fill_count, 1)
+
 
 @classmethod
 def tearDownClass(cls):

@@ -47,6 +47,7 @@ class VehiclesFlow(unittest.TestCase):
         self.driver.back()
         self.driver.scroll(self.driver.find_element_by_id("com.evancharlton.mileage:id/type"),
                            self.driver.find_element_by_id("com.evancharlton.mileage:id/title"))
+        time.sleep(1)
         self.driver.find_element_by_id('com.evancharlton.mileage:id/make_default').click()
         self.driver.find_element_by_id('com.evancharlton.mileage:id/distance').click()
         time.sleep(1)
