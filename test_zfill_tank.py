@@ -17,7 +17,7 @@ class Untitled(unittest.TestCase):
         "platformName": "Android",
         "automationName": "UiAutomator2",
         "deviceName": "emulator-5556",
-        "app": "C:\\Users\\usuario\\Downloads\\com.evancharlton.mileage.apk"
+        "app": "C:\\Users\\usuario\\Downloads\\signedMutants\\parcial2\\com.evancharlton.mileage-mutant25\\com.evancharlton.mileage_3110-aligned-debugSigned.apk"
     }
     testName = 'Untitled'
     driver = None
