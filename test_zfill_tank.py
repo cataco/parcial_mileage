@@ -17,7 +17,7 @@ class Untitled(unittest.TestCase):
         "platformName": "Android",
         "automationName": "UiAutomator2",
         "deviceName": "emulator-5556",
-        "app": "/Users/ccordob/Downloads/mutantest_mileage/com.evancharlton.mileage-mutant2/com.evancharlton.mileage_3110-aligned-debugSigned.apk"
+        "app": "C:\\Users\\usuario\\Downloads\\com.evancharlton.mileage.apk"
     }
     testName = 'Untitled'
     driver = None
@@ -27,9 +27,7 @@ class Untitled(unittest.TestCase):
         cls.dc['reportDirectory'] = cls.reportDirectory
         cls.dc['reportFormat'] = cls.reportFormat
         cls.dc['testName'] = cls.testName
-        cls.dc['udid'] = 'emulator-5554'
-        cls.dc['appPackage'] = 'com.evancharlton.mileage'
-        cls.dc['appActivity'] = '.Mileage'
+        cls.dc['udid'] = ''
         cls.dc['platformName'] = 'android'
         cls.driver = webdriver.Remote('http://localhost:4723/wd/hub', cls.dc)
 
@@ -50,7 +48,6 @@ class Untitled(unittest.TestCase):
                                                         "android.widget.FrameLayout/android.widget.FrameLayout/"
                                                         "android.widget.LinearLayout/android.widget.FrameLayout/"
                                                         "android.widget.LinearLayout/android.widget.ListView/"
-                                                        "android.widget.LinearLayout/"
                                                         "android.widget.LinearLayout").__len__()
         self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/"
                                           "android.widget.FrameLayout/android.widget.TabHost/"
@@ -68,72 +65,30 @@ class Untitled(unittest.TestCase):
                                                             "android.widget.FrameLayout/android.widget.FrameLayout/"
                                                             "android.widget.LinearLayout/android.widget.FrameLayout/"
                                                             "android.widget.LinearLayout/android.widget.ListView/"
-                                                            "android.widget.LinearLayout/"
-                                                            "android.widget.LinearLayout[1]").__len__()
+                                                            "android.widget.LinearLayout").__len__()
         self.assertEquals(new_fill_count - fill_count, 1)
 
-    def test_edit_fill(self):
-        #try:
-            #self.driver.find_element_by_id('android:id/button1').click()
-        #except:
-            #pass
-            time.sleep(1)
-            self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/"
-                                              "android.widget.FrameLayout/android.widget.TabHost/"
-                                              "android.widget.LinearLayout/android.widget.TabWidget/"
-                                              "android.widget.RelativeLayout[2]/android.widget.TextView").click()
-            time.sleep(1)
-            self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout"
-                                              "/android.widget.LinearLayout/android.widget.FrameLayout/"
-                                              "android.widget.TabHost/android.widget.LinearLayout/"
-                                              "android.widget.FrameLayout/android.widget.FrameLayout/"
-                                              "android.widget.LinearLayout/android.widget.FrameLayout/"
-                                              "android.widget.LinearLayout/android.widget.ListView/"
-                                              "android.widget.LinearLayout/"
-                                              "android.widget.LinearLayout[1]").click()
-            self.driver.find_element_by_id("com.evancharlton.mileage:id/edit").click()
-            time.sleep(1)
-            price = '2'
-            volume = '2'
-            odometer = '2'
-            self.driver.find_element_by_id("com.evancharlton.mileage:id/price").send_keys(price)
-            self.driver.find_element_by_id("com.evancharlton.mileage:id/volume").send_keys(volume)
-            self.driver.find_element_by_id("com.evancharlton.mileage:id/odometer").send_keys(odometer)
-            self.driver.find_element_by_id("com.evancharlton.mileage:id/save_btn").click()
-            time.sleep(1)
-            for i in range(2, 5):
-                fill_data = self.driver.find_element_by_xpath("/hierarchy/"
-                                                              "android.widget.FrameLayout/"
-                                                              "android.widget.LinearLayout/"
-                                                              "android.widget.FrameLayout[2]/"
-                                                              "android.widget.LinearLayout/"
-                                                              "android.widget.ScrollView/"
-                                                              "android.widget.LinearLayout/"
-                                                              "android.widget.LinearLayout[{}]/"
-                                                              "android.widget.TextView[2]".format(i)).text
-                self.assertTrue('2' in fill_data)
-
-
-    def test_remove_fill(self):
-        try:
-            self.driver.find_element_by_id('android:id/button1').click()
-        except:
-            pass
-        time.sleep(1)
-        actions = TouchAction(self.driver)
+    def test_delete_fill(self):
+        time.sleep(2)
         self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/"
                                           "android.widget.FrameLayout/android.widget.TabHost/"
                                           "android.widget.LinearLayout/android.widget.TabWidget/"
-                                          "android.widget.RelativeLayout[2]/android.widget.TextView").click()
-        time.sleep(1)
+                                          "android.widget.RelativeLayout[1]/android.widget.TextView").click()
+        time.sleep(2)
+        self.driver.find_element_by_id("com.evancharlton.mileage:id/price").send_keys('3')
+        self.driver.find_element_by_id("com.evancharlton.mileage:id/volume").send_keys('3')
+        self.driver.find_element_by_id("com.evancharlton.mileage:id/odometer").send_keys('3')
+        self.driver.find_element_by_id("com.evancharlton.mileage:id/save_btn").click()
+        time.sleep(2)
+        actions = TouchAction(self.driver)
         fill_count = self.driver.find_elements_by_xpath("/hierarchy/android.widget.FrameLayout"
                                                         "/android.widget.LinearLayout/android.widget.FrameLayout/"
                                                         "android.widget.TabHost/android.widget.LinearLayout/"
                                                         "android.widget.FrameLayout/android.widget.FrameLayout/"
                                                         "android.widget.LinearLayout/android.widget.FrameLayout/"
                                                         "android.widget.LinearLayout/android.widget.ListView/"
-                                                        "android.widget.LinearLayout/"
                                                         "android.widget.LinearLayout").__len__()
+        print(fill_count)
         element = self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout"
                                                     "/android.widget.LinearLayout/android.widget.FrameLayout/"
                                                     "android.widget.TabHost/android.widget.LinearLayout/"
@@ -141,22 +96,51 @@ class Untitled(unittest.TestCase):
                                                     "android.widget.LinearLayout/android.widget.FrameLayout/"
                                                     "android.widget.LinearLayout/android.widget.ListView/"
                                                     "android.widget.LinearLayout/"
-                                                    "android.widget.LinearLayout[1]")
+                                                    "android.widget.LinearLayout[1]/android.widget.TextView")
         actions.long_press(element)
+        actions.perform()
         self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/"
-                                          "android.widget.ListView/android.widget.LinearLayout[2]/"
-                                          "android.widget.LinearLayout").click()
-        new_fill_count = self.driver.find_elements_by_xpath("/hierarchy/android.widget.FrameLayout"
-                                                            "/android.widget.LinearLayout/android.widget.FrameLayout/"
+                                          "android.widget.ListView/android.widget.LinearLayout[2]").click()
+
+        self.driver.find_element_by_id("android:id/button1").click()
+        time.sleep(2)
+        new_fill_count = self.driver.find_elements_by_xpath("/hierarchy/android.widget.FrameLayout/"
+                                                            "android.widget.LinearLayout/android.widget.FrameLayout/"
                                                             "android.widget.TabHost/android.widget.LinearLayout/"
                                                             "android.widget.FrameLayout/android.widget.FrameLayout/"
                                                             "android.widget.LinearLayout/android.widget.FrameLayout/"
                                                             "android.widget.LinearLayout/android.widget.ListView/"
-                                                            "android.widget.LinearLayout/"
                                                             "android.widget.LinearLayout").__len__()
-
         self.assertEquals(fill_count - new_fill_count, 1)
 
+    def test_edit_fill(self):
+        time.sleep(1)
+        self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout"
+                                          "/android.widget.LinearLayout/android.widget.FrameLayout/"
+                                          "android.widget.TabHost/android.widget.LinearLayout/"
+                                          "android.widget.FrameLayout/android.widget.FrameLayout/"
+                                          "android.widget.LinearLayout/android.widget.FrameLayout/"
+                                          "android.widget.LinearLayout/android.widget.ListView/"
+                                          "android.widget.LinearLayout/"
+                                          "android.widget.LinearLayout[1]").click()
+        time.sleep(2)
+        self.driver.find_element_by_id("com.evancharlton.mileage:id/edit").click()
+        time.sleep(2)
+        self.driver.find_element_by_id("com.evancharlton.mileage:id/price").send_keys('2')
+        self.driver.find_element_by_id("com.evancharlton.mileage:id/volume").send_keys('2')
+        self.driver.find_element_by_id("com.evancharlton.mileage:id/odometer").send_keys('2')
+        self.driver.find_element_by_id("com.evancharlton.mileage:id/save_btn").click()
+        time.sleep(2)
+        for i in range(2, 5):
+            fill_data = self.driver.find_element_by_xpath("/hierarchy/"
+                                                          "android.widget.FrameLayout/"
+                                                          "android.widget.LinearLayout/"
+                                                          "android.widget.FrameLayout[2]/"
+                                                          "android.widget.LinearLayout/"
+                                                          "android.widget.ScrollView/"
+                                                          "android.widget.LinearLayout/"
+                                                          "android.widget.LinearLayout[{}]/"
+                                                          "android.widget.TextView[2]".format(i)).text
 
     @classmethod
     def tearDownClass(cls):
