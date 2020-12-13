@@ -19,7 +19,8 @@ class Untitled(unittest.TestCase):
         "platformName": "Android",
         "automationName": "UiAutomator2",
         "deviceName": "emulator-5556",
-        "app": "/Users/SergioM/Downloads/com.evancharlton.mileage.apk"
+        "app": "/Users/ccordob/Downloads/mutantest_mileage/com.evancharlton.mileage-mutant4001/com.evancharlton.mileage_3110-aligned-debugSigned.apk"
+
     }
     testName = 'Untitled'
     driver = None
@@ -35,7 +36,7 @@ class Untitled(unittest.TestCase):
         cls.dc['platformName'] = 'android'
         cls.driver = webdriver.Remote('http://localhost:4723/wd/hub', cls.dc)
 
-    def pruebaNextBack(self):
+    def test_pruebaNextBack(self):
         self.driver.find_element_by_xpath("xpath=//*[@id='price']").send_keys('22')
         self.driver.find_element_by_xpath("xpath=//*[@id='volume']").send_keys('22')
         self.driver.find_element_by_xpath("xpath=//*[@id='odometer']").send_keys('22')
@@ -69,7 +70,7 @@ class Untitled(unittest.TestCase):
         self.driver.find_element_by_xpath("xpath=//*[@text='Next']").click()
         self.driver.find_element_by_xpath("xpath=//*[@text='Previous']").click()
 
-    def pruebaOrden(self):
+    def test_pruebaOrden(self):
         self.driver.find_element_by_xpath("xpath=//*[@id='price']").send_keys('22')
         self.driver.find_element_by_xpath("xpath=//*[@id='volume']").send_keys('22')
         self.driver.find_element_by_xpath("xpath=//*[@id='odometer']").send_keys('22')
@@ -106,7 +107,7 @@ class Untitled(unittest.TestCase):
         self.driver.press_keycode(4)  # back
 
 
-    def pruebaStatistics(self):
+    def test_pruebaStatistics(self):
         self.driver.find_element_by_xpath("xpath=//*[@id='price']").send_keys('22')
         self.driver.find_element_by_xpath("xpath=//*[@id='volume']").send_keys('22')
         self.driver.find_element_by_xpath("xpath=//*[@id='odometer']").send_keys('22')
