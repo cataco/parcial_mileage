@@ -32,6 +32,7 @@ class Untitled(unittest.TestCase):
         cls.driver = webdriver.Remote('http://localhost:4723/wd/hub', cls.dc)
 
     def test_add_fill(self):
+        self.driver.save_screenshot("screenshots/install.png")
         try:
             self.driver.find_element_by_id('android:id/button1').click()
         except:
@@ -53,6 +54,7 @@ class Untitled(unittest.TestCase):
                                           "android.widget.FrameLayout/android.widget.TabHost/"
                                           "android.widget.LinearLayout/android.widget.TabWidget/"
                                           "android.widget.RelativeLayout[1]/android.widget.TextView").click()
+        self.driver.save_screenshot("screenshots/form.png")
         time.sleep(1)
         self.driver.find_element_by_id("com.evancharlton.mileage:id/price").send_keys('1')
         self.driver.find_element_by_id("com.evancharlton.mileage:id/volume").send_keys('1')
@@ -67,6 +69,7 @@ class Untitled(unittest.TestCase):
                                                             "android.widget.LinearLayout/android.widget.ListView/"
                                                             "android.widget.LinearLayout").__len__()
         self.assertEquals(new_fill_count - fill_count, 1)
+        self.driver.save_screenshot("screenshots/list.png")
 
     def test_delete_fill(self):
         time.sleep(2)
@@ -99,9 +102,10 @@ class Untitled(unittest.TestCase):
                                                     "android.widget.LinearLayout[1]/android.widget.TextView")
         actions.long_press(element)
         actions.perform()
+        self.driver.save_screenshot("screenshots/sublist.png")
         self.driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/"
                                           "android.widget.ListView/android.widget.LinearLayout[2]").click()
-
+        self.driver.save_screenshot("screenshots/delete_modal.png")
         self.driver.find_element_by_id("android:id/button1").click()
         time.sleep(2)
         new_fill_count = self.driver.find_elements_by_xpath("/hierarchy/android.widget.FrameLayout/"
@@ -126,6 +130,7 @@ class Untitled(unittest.TestCase):
         time.sleep(2)
         self.driver.find_element_by_id("com.evancharlton.mileage:id/edit").click()
         time.sleep(2)
+        self.driver.save_screenshot("screenshots/edit_page.png")
         self.driver.find_element_by_id("com.evancharlton.mileage:id/price").send_keys('2')
         self.driver.find_element_by_id("com.evancharlton.mileage:id/volume").send_keys('2')
         self.driver.find_element_by_id("com.evancharlton.mileage:id/odometer").send_keys('2')
