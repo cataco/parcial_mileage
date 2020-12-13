@@ -37,6 +37,7 @@ class VehiclesFlow(unittest.TestCase):
         self.driver.find_element_by_xpath(
             "//*[@text='Vehicles']/parent::*").click()
         time.sleep(1)
+        self.driver.save_screenshot("screenshots/createvehicle_.png")
         self.driver.find_element_by_id("android:id/text1").click()
         time.sleep(1)
         self.driver.find_element_by_id('com.evancharlton.mileage:id/title').send_keys('TestVehicleName')
@@ -44,6 +45,7 @@ class VehiclesFlow(unittest.TestCase):
         self.driver.find_element_by_id('com.evancharlton.mileage:id/make').send_keys('Test-Make')
         self.driver.find_element_by_id('com.evancharlton.mileage:id/model').send_keys('Test-Model')
         self.driver.find_element_by_id('com.evancharlton.mileage:id/description').send_keys('Test-Description')
+        self.driver.save_screenshot("screenshots/createvehicle2_.png")
         self.driver.back()
         self.driver.scroll(self.driver.find_element_by_id("com.evancharlton.mileage:id/type"),
                            self.driver.find_element_by_id("com.evancharlton.mileage:id/title"))
@@ -64,6 +66,7 @@ class VehiclesFlow(unittest.TestCase):
         self.driver.find_element_by_id('com.evancharlton.mileage:id/currency').send_keys('$')
         self.driver.find_element_by_id('com.evancharlton.mileage:id/save_btn').click()
         time.sleep(1)
+        self.driver.save_screenshot("screenshots/createvehicle3_.png")
         name = self.driver.find_element_by_id("android:id/text1").get_attribute(
             "text")
         self.assertEqual(name, 'TestVehicleName')
